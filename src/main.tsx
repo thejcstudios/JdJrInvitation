@@ -7,6 +7,7 @@ import "./assets/styles/Navbar.css";
 import './assets/styles/Countdown.css'
 import './assets/styles/Intro.css'
 import './assets/styles/About.css'
+import './assets/styles/Entourage.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

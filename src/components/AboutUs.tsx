@@ -94,14 +94,6 @@ const About = () => {
               />
             </div>
           </section>
-
-          {/* Section 3: More content to ensure scrollability with custom CSS class */}
-          <section className="parallax-section-3">
-            <h3>Entourage</h3>
-            <p>
-        
-            </p>
-          </section>
             </div>
         
       

@@ -1,0 +1,207 @@
+/* --- CSS for body (No Global Background) --- */
+body {
+  /* Removed: background-image, background-size, background-position, background-repeat, background-attachment */
+  min-height: 100vh; /* Ensures the page takes full viewport height */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* You might want a simple fallback background color if your main background image doesn't load */
+  background-color: #F5DEB3; /* A light, neutral background for the rest of the page */
+}
+
+/* --- Your existing .checklist-container styles (Now with its own flowery background) --- */
+
+/* Import font if not already done. Add this to your public/index.html or App.css */
+/* @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap'); */
+
+
+.checklist-container {
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Dancing Script', cursive;
+  width: 80%;
+  margin-top: 5%;
+  padding: 2.5rem;
+  /* Now the flowery background is here! */
+  background-image: url('your-path-to-flowery-background.jpg'); /* <<< REPLACE WITH YOUR IMAGE URL */
+  background-size: cover; /* Image covers the container */
+  background-position: center center; /* Centers the image within the container */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  /* background-attachment: fixed; */ /* Removed, as fixed is usually for global backgrounds */
+
+  background: rgb(250, 235, 215);
+  backdrop-filter: blur(0px); /* Removed or set to 0, as it was blurring *behind* the container */
+  
+  border-radius: 1rem;
+  /* Elegant Border - Static */
+  border: 1px solid rgba(255, 105, 180, 0.3);
+  /* Multi-layered & Refined Shadow - Static */
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.05),
+    0 12px 24px rgba(0, 0, 0, 0.1),
+    0 0 0 5px rgba(255, 105, 180, 0.1);
+  position: relative;
+  z-index: 1;
+  transform-origin: center center;
+  box-sizing: border-box;
+}
+
+/* Flower Border using pseudo-elements - Static */
+.checklist-container::before,
+.checklist-container::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Top-Left Flower - Static */
+.checklist-container::before {
+  top: -110px;
+  left: -80px;
+  background-image: url('/images/flower1.webp'); /* <<< REPLACE WITH YOUR IMAGE URL */
+  transform: rotate(0deg);
+}
+
+/* Bottom-Right Flower - Static */
+.checklist-container::after {
+  bottom: -100px;
+  right: -100px;
+  background-image: url('/images/flower2.webp'); /* <<< REPLACE WITH YOUR IMAGE URL */
+  transform: rotate(15deg);
+}
+
+/* --- Rest of your CSS styles go here --- */
+
+/* Main titles */
+.main-title-wedding {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3em;
+  text-align: center;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.main-title-checklist {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8em;
+  text-align: center;
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+/* Horizontal separator line */
+.section-separator {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  margin: 40px 0;
+}
+
+/* Grid for two-column sections */
+.checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+/* Column styling */
+.category-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Category section styling */
+.category-section {
+  background-color: #fff; /* Keep this for individual section backgrounds */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+/* Category title */
+.category-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5em;
+  color: #884a56;
+  margin-top: 0;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.centered-title {
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+/* List of items */
+.category-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual checklist item */
+.checklist-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: #333;
+  font-family: 'Dancing Script', cursive;
+}
+
+.checklist-item:hover {
+  color: #884a56;
+}
+
+/* Completed item styling */
+.checklist-item.completed .item-text {
+  text-decoration: line-through;
+  color: #888;
+}
+
+/* Item text styling */
+.item-text {
+  font-size: 1em;
+  line-height: 1.4;
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Specific styling for the Program section */
+.program-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.program-items {
+  display: inline-block;
+  text-align: left;
+}
+
+/* Concluding message font */
+.concluding-message {
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 50px;
+  color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .checklist-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

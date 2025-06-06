@@ -75,7 +75,21 @@ Young Workers</p>
           <h1>Prenup</h1>
         
           <h3 className='swipe'>Swipe right</h3>
-         
+          <svg
+  className="arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="40"
+  height="40"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#966F4A"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <line x1="5" y1="12" x2="19" y2="12" />
+  <polyline points="12 5 19 12 12 19" />
+</svg>
         </div>
         </div>
       </div>
