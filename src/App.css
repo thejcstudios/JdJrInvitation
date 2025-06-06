@@ -21,5 +21,10 @@ html, body {
     font-size: 20px;
 
   }
+  .parallax-section-2 {
+    
+    display: grid !important;
+   
+  }
 
 }
