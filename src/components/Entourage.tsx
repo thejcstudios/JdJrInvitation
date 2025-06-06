@@ -247,7 +247,7 @@ const WeddingChecklist: React.FC = () => {
       <div className="checklist-grid two-column-section">
         {checklistData.filter(category =>
           !['Program', 'Parents of the Groom', 'Parents of the Bride', 'Principal Sponsor (Mr.)', 'Principal Sponsor (Mrs.)'].includes(category.title)
-        ).reduce((acc: ChecklistCategory[][], current, index, array) => {
+        ).reduce((acc: ChecklistCategory[][], current, index) => {
           if (index % 2 === 0) {
             acc.push([current]);
           } else {
