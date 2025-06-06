@@ -1,0 +1,99 @@
+.background-text-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Horizontally center the overlay on all screen sizes */
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .text-overlay {
+    position: relative; /* Changed to relative so it respects parent's flex centering */
+    /* top, bottom, left are no longer needed with flex centering */
+    width: 90%; /* Default width for mobile, providing some side padding */
+    max-width: 28rem; /* Max width on smaller screens for readability */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    align-items: center; /* Center children horizontally within the overlay */
+    text-align: center; /* Center text within the overlay */
+  }
+
+  .text-overlay h1 {
+    color: #FFFFFF;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    text-align: center; /* Ensure text is centered */
+  }
+
+  .text-overlay p {
+    color: #E5E7EB;
+    font-size: 1.125rem;
+    border-radius: 0.5rem;
+    text-align: center; /* Ensure text is centered */
+  }
+
+  .call-to-action-button {
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #22C55E;
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 9999px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 300ms ease-in-out;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    align-self: center; /* Center the button within the overlay */
+  }
+
+  .call-to-action-button:hover {
+    background-color: #16A34A;
+  }
+
+  /* Responsive adjustments for medium screens (md:) */
+  @media (min-width: 768px) {
+    .background-text-container {
+      justify-content: flex-start; /* Revert to left-aligning the overlay */
+    }
+
+    .text-overlay {
+      position: absolute; /* Revert to absolute positioning */
+      top: 0;
+      bottom: 0;
+      left: 0; /* Align to the left edge */
+      width: 50%; /* Original width for medium screens */
+      max-width: none; /* Remove max-width constraint */
+      padding: 3rem;
+      align-items: flex-start; /* Revert children to left alignment */
+      text-align: left; /* Revert text to left alignment */
+    }
+    .text-overlay h1,
+    .text-overlay p {
+      text-align: left; /* Ensure text is left aligned */
+    }
+    .call-to-action-button {
+      align-self: flex-start; /* Revert button to left alignment */
+    }
+  }
+
+  /* Responsive adjustments for large screens (lg:) */
+  @media (min-width: 1024px) {
+    .text-overlay {
+      width: 33.333333%;
+    }
+    .text-overlay h1 {
+      font-size: 3rem;
+    }
+    .text-overlay p {
+      font-size: 1.25rem;
+    }
+  }

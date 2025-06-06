@@ -1,0 +1,104 @@
+
+    
+
+    .countdown-wrapper {
+        /* These styles are applied to the outermost div of this component
+            to encapsulate its styling without affecting the global body. */
+        background-color: #91a1b0; /* Base background for the container */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        flex-direction: column;
+        color: var(--clr-primary);
+        margin: 0; /* Reset default body margin */
+        height: 50vh; /* Take full viewport height */
+        position: relative; /* Needed for ::before pseudo-element */
+        overflow: hidden; /* Prevent scrolling */
+    }
+
+    /* Pseudo-element for the background image */
+    .countdown-wrapper::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("/images/bg.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    .countdown-wrapper h1 {
+    
+        z-index: 1; /* Ensure title is above background */
+    }
+
+    .countdown {
+        margin-inline: auto;
+        display: flex;
+        gap: 0.75rem;
+        color: #FFEBCD;
+        z-index: 1; /* Ensure countdown is above background */
+        width: 80%;
+        justify-content: center;
+    }
+
+
+    /* global.css or Tailwind plugin */
+    span {
+    transition: all 0.3s ease;
+    display: inline-block;
+    min-width: 1ch;
+    }
+
+
+    
+
+    .countdown > div {
+        justify-content: center;
+        background-color: #ffebcd9c;
+        color: black;
+        width: 80%;
+        padding: 1rem 1rem 3rem;
+        border-radius: 0.5rem;
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        transition: all 0.2s; /* Basic transition for overall div, individual spans have more specific ones */
+    }
+
+    .countdown > div > span {
+        display: flex;
+        place-content: center;
+        font-weight: bold;
+        transition: translate 150ms ease, scale 150ms ease; /* Managed by JS changeNum */
+    }
+
+    .countdown > div::after {
+        content: attr(data-desc);
+        font-size: 0.8rem;
+        position: absolute;
+        text-transform: capitalize;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        /* @starting-style is kept for compatibility with original code if supported */
+     
+        transition: 300ms ease-in-out var(--d);
+    }
+
+    /* Initial animation for .animate-in */
+    .animate-in {
+        animation: animateIn 1s forwards var(--d);
+    }
+
+    @keyframes animateIn {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
