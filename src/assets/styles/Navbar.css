@@ -1,6 +1,7 @@
 :root {
     --transition-duration: 0.5s;
   }
+
   
   .navbar {
     position: fixed;

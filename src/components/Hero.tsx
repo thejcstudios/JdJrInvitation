@@ -211,7 +211,6 @@ const Carousel: React.FC<CarouselProps> = () => {
                 width: '100%',
                 height: '100%',
                 borderRadius: '10px',
-                background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.4), transparent)',
                 pointerEvents: 'none',
               }}
             />
@@ -222,7 +221,6 @@ const Carousel: React.FC<CarouselProps> = () => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                filter: 'brightness(0.75) contrast(0.9)',
                 borderRadius: '10px',
                 pointerEvents: 'none',
                 userSelect: 'none',

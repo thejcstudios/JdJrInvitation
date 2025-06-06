@@ -1,0 +1,202 @@
+ /* Universal reset for html, body, and the root div to ensure full viewport coverage */
+
+  /* Using a unique class name for the root container */
+  .parallax-container {
+    min-height: 200vh; /* Ensures enough scroll space */
+    width: 100%; /* Explicitly set width to 100% */
+    background: linear-gradient(to bottom right, #f3f4f6, #d1d5db); /* Gradient background */
+    font-family: 'Inter', sans-serif; /* Recommended font */
+    color: #374151; /* Default text color */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+
+  .parallax-header h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    color: #1f2937; /* text-gray-900 */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 0.5rem; /* p-2 */
+  }
+
+  /* Main content styles */
+  .parallax-main-content {
+    position: relative;
+    z-index: 0;
+    box-sizing: border-box;
+  }
+
+  /* Section 1: Initial fade-in content */
+  .parallax-section-1 {
+    background: rgb(250, 235, 215);;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem; /* p-8 */
+    transition: all 1000ms ease-out; /* transition-all duration-1000 ease-out */
+    opacity: 0; /* Default hidden state */
+    transform: translateY(2rem); /* Default slightly moved down state */
+    box-sizing: border-box;
+  }
+
+  .parallax-section-1.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .parallax-section-1-inner {
+    max-width: 48rem; /* max-w-4xl */
+    text-align: center;
+  }
+
+  .parallax-section-1 h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem; /* text-5xl */
+    font-weight: 800; /* font-extrabold */
+    color: rgb(150, 111, 74);; /* text-blue-700 */
+    margin-bottom: 1.5rem; /* mb-6 */
+  }
+
+  .parallax-section-1 p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.625; /* leading-relaxed */
+    color: #4b5563; /* text-gray-700 */
+  }
+
+  /* Section 2: Parallax content */
+  .parallax-section-2 {
+    background: rgb(250, 235, 215); ;
+    position: relative;
+    width: 100%;
+    height: 150vh;
+    display: flex;
+    flex-direction: column; /* flex-col */
+    align-items: flex-start; /* items-start */
+    justify-content: center;
+    padding: 5rem 2rem; /* py-20 px-8 */
+    gap: 3rem; /* gap-12 */
+    overflow: hidden; /* Re-added overflow:hidden to ensure the container correctly clips when elements move outside */
+    box-sizing: border-box;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 768px) { /* md breakpoint */
+    .parallax-section-2 {
+      flex-direction: row; /* md:flex-row */
+      gap: 6rem; /* md:gap-24 */
+    }
+  }
+
+  /* Left section: Text content */
+  .parallax-text-content {
+    width: 100%; /* Default full width for mobile */
+    padding: 2rem; /* p-8 */
+    background-color: rgba(255, 255, 255, 0.7); /* White with opacity */
+    backdrop-filter: blur(5px);
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    position: relative;
+    z-index: 1;
+    transform-origin: center center; /* Ensure transform applies from center */
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) { /* md breakpoint */
+    .parallax-text-content {
+      width: 50%; /* md:w-1/2 */
+    }
+  }
+
+  .parallax-text-content h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 700; /* font-bold */
+    color: rgb(150, 111, 74);; /* text-purple-700 */
+    margin-bottom: 1.5rem; /* mb-6 */
+  }
+
+  .parallax-text-content p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.625; /* leading-relaxed */
+    margin-bottom: 1rem; /* mb-4 */
+    color: #1f2937; /* text-gray-800 */
+  }
+
+  /* Right section: Image content */
+  .parallax-image-content {
+    width: 100%; /* Default full width for mobile */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    transform-origin: center center; /* Ensure transform applies from center */
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) { /* md breakpoint */
+    .parallax-image-content {
+      width: 50%; /* md:w-1/2 */
+    }
+    .parallax-image-content img {
+    
+        /* Position lower with animation compatibility */
+        transform: translateY(10px) !important; /* Adjust as needed */
+      }
+  }
+
+  .parallax-image-content img {
+    width: 100%;
+    max-width: 32rem;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 4px solid white;
+    object-fit: cover;
+  
+    /* Position lower with animation compatibility */
+  }
+
+  /* Section 3: More content */
+  .parallax-section-3 {
+    width: 100%; /* w-full */
+    padding: 5rem 2rem; /* py-20 px-8 */
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    margin-top: 3rem; /* mt-12 */
+    max-width: 48rem; /* max-w-4xl */
+    margin-left: auto; /* mx-auto */
+    margin-right: auto; /* mx-auto */
+    box-sizing: border-box;
+  }
+
+  .parallax-section-3 h3 {
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 700; /* font-bold */
+    color: #047857; /* text-emerald-700 */
+    margin-bottom: 1.5rem; /* mb-6 */
+  }
+
+  .parallax-section-3 p {
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.625; /* leading-relaxed */
+    margin-bottom: 1rem; /* mb-4 */
+    color: #1f2937; /* text-gray-800 */
+  }
+
+  /* Footer styles */
+  .parallax-footer {
+    width: 100%;
+    text-align: center;
+    padding: 2.5rem; /* py-10 */
+    color: #4b5563; /* text-gray-600 */
+    box-sizing: border-box;
+  }

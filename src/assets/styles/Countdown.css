@@ -3,7 +3,7 @@
 
     .countdown-wrapper {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
         padding: 1rem;
         flex-direction: column;
@@ -25,7 +25,6 @@
 
     .countdown-wrapper h1 {
     font-family: 'Dancing Script', cursive;
-    font-weight: 300;
     font-size: 50px;
     color: #D2691E;
     margin-top: 5px;
@@ -111,6 +110,12 @@
 
 @media (max-width: 1024px) {
     .countdown-wrapper {
-        height: 30vh; /* This height will remain consistent */
+        height: 40vh; /* This height will remain consistent */
+        
     }
+    .countdown-wrapper h1 {
+       
+        font-size: 40px;
+       
+        }
   }

@@ -102,7 +102,7 @@ const Countdown: React.FC = () => {
 
   return (
     <div className="countdown-wrapper">
-      <h1>Days Till Wedding Day</h1>
+      <h1>Wedding Day</h1>
       <div className="countdown">
         <div data-desc="months">
           <span ref={refs.months[0]}></span>

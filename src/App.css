@@ -9,3 +9,17 @@ html, body {
   background-color: #fffafc;
   font-weight: 400;
 }
+
+@media (max-width: 768px) {
+  .countdown-wrapper {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .navbar-list {
+    font-size: 20px;
+
+  }
+
+}
