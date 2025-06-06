@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap');
-
+* {
+  -webkit-overflow-scrolling: touch;
+}
 html, body {
   font-family: 'Playfair Display', serif;
   margin: 0;
@@ -21,10 +23,17 @@ html, body {
     font-size: 20px;
 
   }
+
+  .checklist-container {
+    width: 100% !important;
+    margin: 0;
+  }
   .parallax-section-2 {
     
     display: grid !important;
+    justify-items: center;
    
   }
 
 }
+

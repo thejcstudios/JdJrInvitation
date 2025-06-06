@@ -1,58 +1,67 @@
 /* --- CSS for body (No Global Background) --- */
 body {
-  /* Removed: background-image, background-size, background-position, background-repeat, background-attachment */
-  min-height: 100vh; /* Ensures the page takes full viewport height */
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* You might want a simple fallback background color if your main background image doesn't load */
-  background-color: #F5DEB3; /* A light, neutral background for the rest of the page */
+
+  /* --- IMPORTANT FOR iOS SCROLLING --- */
+  /* Enables momentum scrolling on iOS devices */
+  -webkit-overflow-scrolling: touch; 
+  /* Ensures the body itself can be scrolled if content overflows */
+  overflow-y: scroll;
 }
 
 /* --- Your existing .checklist-container styles (Now with its own flowery background) --- */
 
 /* Import font if not already done. Add this to your public/index.html or App.css */
 /* @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap'); */
-
-
+.scroll-wrapper {
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
 .checklist-container {
+  border-image: ('https://www.w3schools.com/css/border.png');
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   font-family: 'Dancing Script', cursive;
-  width: 80%;
-  margin-top: 5%;
-  padding: 2.5rem;
-  /* Now the flowery background is here! */
-  background-image: url('your-path-to-flowery-background.jpg'); /* <<< REPLACE WITH YOUR IMAGE URL */
-  background-size: cover; /* Image covers the container */
-  background-position: center center; /* Centers the image within the container */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  /* background-attachment: fixed; */ /* Removed, as fixed is usually for global backgrounds */
+  min-height: 100vh;
+  width: 90%;
+  margin-top: 5%; /* You might still need this if body's flexbox doesn't push it down enough */
+  margin-bottom: 5%;
+  padding: 1rem;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: visible;
+  
+  /* You had `background: rgb(250, 235, 215);` which overwrites background-image. */
+  /* If you want an overlay color, use rgba on background-color. */
+  /* For just the image, remove background-color or set to transparent. */
+  /* Let's remove background-color to fully show the image. */
+  background-color: rgb(250, 235, 215); 
 
-  background: rgb(250, 235, 215);
-  backdrop-filter: blur(0px); /* Removed or set to 0, as it was blurring *behind* the container */
   
   border-radius: 1rem;
-  /* Elegant Border - Static */
   border: 1px solid rgba(255, 105, 180, 0.3);
-  /* Multi-layered & Refined Shadow - Static */
   box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.05),
     0 12px 24px rgba(0, 0, 0, 0.1),
     0 0 0 5px rgba(255, 105, 180, 0.1);
-  position: relative;
   z-index: 1;
   transform-origin: center center;
   box-sizing: border-box;
+
+  /* --- iOS SCROLLING OPTIMIZATIONS --- */
+  /* Promote element to its own composite layer for better performance */
+  /* Use sparingly, as too many can hurt performance */
 }
+
 
 /* Flower Border using pseudo-elements - Static */
 .checklist-container::before,
 .checklist-container::after {
   content: '';
-  position: absolute;
+  position: relative; /* ← CHANGED from absolute to fixed */
   width: 300px;
   height: 300px;
   background-size: contain;
@@ -61,21 +70,14 @@ body {
   pointer-events: none;
 }
 
-/* Top-Left Flower - Static */
+/* Top-left flower */
 .checklist-container::before {
-  top: -110px;
-  left: -80px;
-  background-image: url('/images/flower1.webp'); /* <<< REPLACE WITH YOUR IMAGE URL */
-  transform: rotate(0deg);
+  top: -100px;
+  left: -30px;
+  display: flex;
+  background-image: url('/images/flower1.webp');
 }
 
-/* Bottom-Right Flower - Static */
-.checklist-container::after {
-  bottom: -100px;
-  right: -180px;
-  background-image: url('/images/flower2.webp'); /* <<< REPLACE WITH YOUR IMAGE URL */
-  transform: rotate(15deg);
-}
 
 /* --- Rest of your CSS styles go here --- */
 
@@ -96,6 +98,28 @@ body {
   margin-top: 0;
   margin-bottom: 40px;
 }
+
+/* Separated Box Styles (from previous response) */
+.program-box, .entourage-box {
+  border: 10px solid transparent; /* Keep border transparent to see the image */
+  padding: 15px;
+  /* Use a known working image if you have one, or just re-verify border.png's path */
+  border-image: url(https://www.w3schools.com/css/border.png) 30 stretch; /* Try 'round' instead of 'stretch' for testing */
+  /* Also try adding border-image-width to ensure it's applied */
+  border-image-width: 10px;
+  padding: 25px;
+  margin-bottom: 30px;
+  background-color: #fffaf0; /* FloralWhite */
+  position: relative; 
+ 
+}
+
+.entourage-box {
+  margin-top: 20px; /* Space above the program box */
+}
+
+
+
 
 /* Horizontal separator line */
 .section-separator {
@@ -120,8 +144,7 @@ body {
 }
 
 /* Category section styling */
-.category-section {
-  background-color: #fff; /* Keep this for individual section backgrounds */
+.category-section2 { /* Renamed from .category-section to avoid conflict with new box styles if any */
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -199,3 +222,9 @@ body {
 }
 
 /* Responsive adjustments */
+@media (max-width: 768px) {
+  .checklist-grid {
+    grid-template-columns: 1fr, 1fr;
+    gap: 20px;
+  }
+}

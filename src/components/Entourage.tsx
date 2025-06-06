@@ -171,14 +171,14 @@ const WeddingChecklist: React.FC = () => {
   };
 
   return (
+    <div className="scroll-wrapper">
+
     <div className="checklist-container">
       {/* Main title section */}
-      <h1 className="main-title-wedding">Entourage</h1>
-      <h2 className="main-title-checklist"> and Program</h2>
 
-      {/* Program Section */}
-      <div className="program-section">
-        <h3 className="category-title">Program</h3>
+      {/* Program Section - Now in its own box */}
+      <div className="program-box">
+      <h1 className="main-title-wedding">Program</h1>
         <ul className="category-items program-items">
           {checklistData.find(cat => cat.title === 'Program')?.items.map(item => (
             <li
@@ -186,114 +186,113 @@ const WeddingChecklist: React.FC = () => {
               className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
               onClick={() => handleToggleComplete(item.id)}
             >
-              {/* Removed Heart Icon SVG */}
               <span className="item-text">{item.text}</span>
             </li>
           ))}
         </ul>
-        <hr className="section-separator" />
       </div>
 
-      {/* Parents Section */}
-      <div className="checklist-grid two-column-section">
-        {checklistData.filter(category => category.title.includes('Parents of the')).map(category => (
-          <div key={category.title} className="category-column">
-            <div className="category-section">
-              <h3 className="category-title">{category.title}</h3>
-              <ul className="category-items">
-                {category.items.map(item => (
-                  <li
-                    key={item.id}
-                    className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
-                    onClick={() => handleToggleComplete(item.id)}
-                  >
-                    {/* Removed Heart Icon SVG */}
-                    <span className="item-text">{item.text}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ))}
-      </div>
-      <hr className="section-separator" />
-
-      {/* Principal Sponsor Section */}
-      <div className="principal-sponsor-section">
-        <h3 className="category-title centered-title">Principal Sponsor</h3>
+      {/* Entourage Section - All other categories grouped into a separate box */}
+      <div className="entourage-box">
+      <h1 className="main-title-wedding">Entourage</h1>
+        {/* Parents Section */}
         <div className="checklist-grid two-column-section">
-          {checklistData.filter(category => category.title.includes('Principal Sponsor')).map(category => (
+          {checklistData.filter(category => category.title.includes('Parents of the')).map(category => (
             <div key={category.title} className="category-column">
-              <ul className="category-items">
-                {category.items.map(item => (
-                  <li
-                    key={item.id}
-                    className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
-                    onClick={() => handleToggleComplete(item.id)}
-                  >
-                    {/* Removed Heart Icon SVG */}
-                    <span className="item-text">{item.text}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <hr className="section-separator" />
-      </div>
-
-
-      {/* Remaining Categories in 2 Columns */}
-      <div className="checklist-grid two-column-section">
-        {checklistData.filter(category =>
-          !['Program', 'Parents of the Groom', 'Parents of the Bride', 'Principal Sponsor (Mr.)', 'Principal Sponsor (Mrs.)'].includes(category.title)
-        ).reduce((acc: ChecklistCategory[][], current, index) => {
-          if (index % 2 === 0) {
-            acc.push([current]);
-          } else {
-            acc[acc.length - 1].push(current);
-          }
-          return acc;
-        }, []).map((pair, index) => (
-          <React.Fragment key={index}>
-            <div className="category-column">
-              <div className="category-section">
-                <h3 className="category-title">{pair[0].title}</h3>
+              <div className="category-section2">
+                <h3 className="category-title">{category.title}</h3>
                 <ul className="category-items">
-                  {pair[0].items.map(item => (
+                  {category.items.map(item => (
                     <li
                       key={item.id}
                       className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
                       onClick={() => handleToggleComplete(item.id)}
                     >
-                      {/* Removed Heart Icon SVG */}
                       <span className="item-text">{item.text}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            {pair[1] && (
-              <div className="category-column">
-                <div className="category-section">
-                  <h3 className="category-title">{pair[1].title}</h3>
+          ))}
+        </div>
+        <hr className="section-separator" />
+
+        {/* Principal Sponsor Section */}
+        <div className="principal-sponsor-section">
+          <h3 className="category-title centered-title">Principal Sponsor</h3>
+          <div className="checklist-grid two-column-section">
+            {checklistData.filter(category => category.title.includes('Principal Sponsor')).map(category => (
+              <div key={category.title} className="category-column">
+                 <div className="category-section2">
                   <ul className="category-items">
-                    {pair[1].items.map(item => (
+                    {category.items.map(item => (
                       <li
                         key={item.id}
                         className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
                         onClick={() => handleToggleComplete(item.id)}
                       >
-                        {/* Removed Heart Icon SVG */}
                         <span className="item-text">{item.text}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
-            )}
-          </React.Fragment>
-        ))}
+            ))}
+          </div>
+          <hr className="section-separator" />
+        </div>
+
+        {/* Remaining Categories in 2 Columns */}
+        <div className="checklist-grid two-column-section">
+          {checklistData.filter(category =>
+            !['Program', 'Parents of the Groom', 'Parents of the Bride', 'Principal Sponsor (Mr.)', 'Principal Sponsor (Mrs.)'].includes(category.title)
+          ).reduce((acc: ChecklistCategory[][], current, index) => {
+            if (index % 2 === 0) {
+              acc.push([current]);
+            } else {
+              acc[acc.length - 1].push(current);
+            }
+            return acc;
+          }, []).map((pair, index) => (
+            <React.Fragment key={index}>
+              <div className="category-column">
+                <div className="category-section2">
+                  <h3 className="category-title">{pair[0].title}</h3>
+                  <ul className="category-items">
+                    {pair[0].items.map(item => (
+                      <li
+                        key={item.id}
+                        className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
+                        onClick={() => handleToggleComplete(item.id)}
+                      >
+                        <span className="item-text">{item.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              {pair[1] && (
+                <div className="category-column">
+                  <div className="category-section2">
+                    <h3 className="category-title">{pair[1].title}</h3>
+                    <ul className="category-items">
+                      {pair[1].items.map(item => (
+                        <li
+                          key={item.id}
+                          className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
+                          onClick={() => handleToggleComplete(item.id)}
+                        >
+                          <span className="item-text">{item.text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
       </div>
 
       {/* Concluding message */}
@@ -302,6 +301,7 @@ const WeddingChecklist: React.FC = () => {
         <br />
         and create a beautiful beginning to your forever.
       </p>
+    </div>
     </div>
   );
 };
