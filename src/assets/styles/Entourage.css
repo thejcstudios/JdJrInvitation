@@ -72,7 +72,7 @@ body {
 /* Bottom-Right Flower - Static */
 .checklist-container::after {
   bottom: -100px;
-  right: -100px;
+  right: -180px;
   background-image: url('/images/flower2.webp'); /* <<< REPLACE WITH YOUR IMAGE URL */
   transform: rotate(15deg);
 }
@@ -199,9 +199,3 @@ body {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .checklist-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
