@@ -28,16 +28,16 @@ const Carousel: React.FC<CarouselProps> = () => {
 
   // Data for carousel items
   const carouselItemsData = [
-    { title: 'Honesty', num: '01', imgSrc: '/images/hero.jpg' },
-    { title: 'Empathy', num: '02', imgSrc: '/images/2.jpg' },
-    { title: 'Transparency', num: '03', imgSrc: '/images/3.jpg' },
-    { title: 'Appreciation', num: '04', imgSrc: '/images/4.jpg' },
-    { title: 'Support', num: '05', imgSrc: '/images/5.jpg' },
-    { title: 'Perseverance', num: '06', imgSrc: '/images/6.jpg' },
-    { title: 'Dedication', num: '07', imgSrc: '/images/7.jpg' },
-    { title: 'Shared Vision', num: '08', imgSrc: '/images/8.jpg' },
-    { title: 'Emotional Closeness', num: '09', imgSrc: '/images/9.jpg' },
-    { title: 'Physical Intimacy', num: '10', imgSrc: '/images/10.jpg' },
+    { title: 'Honesty', num: '', imgSrc: '/images/hero.jpg' },
+    { title: 'Empathy', num: '', imgSrc: '/images/2.jpg' },
+    { title: 'Transparency', num: '', imgSrc: '/images/3.jpg' },
+    { title: 'Appreciation', num: '', imgSrc: '/images/4.jpg' },
+    { title: 'Support', num: '', imgSrc: '/images/5.jpg' },
+    { title: 'Perseverance', num: '', imgSrc: '/images/6.jpg' },
+    { title: 'Dedication', num: '', imgSrc: '/images/7.jpg' },
+    { title: 'Shared Vision', num: '', imgSrc: '/images/8.jpg' },
+    { title: 'Emotional Closeness', num: '', imgSrc: '/images/9.jpg' },
+    { title: 'Commitment', num: '', imgSrc: '/images/10.jpg' },
   ];
 
   // Helper function to calculate z-index for carousel items
@@ -261,6 +261,7 @@ const Carousel: React.FC<CarouselProps> = () => {
     // Applying global-like styles to the root element of this component
     // as we cannot directly style the <body> tag from a React component.
     // If this component is rendered inside <body>, these styles will apply.
+   
     <div style={bodyStyle}>
       <div style={carouselStyle} ref={carouselRef}>
         {carouselItemsData.map((item, index) => (

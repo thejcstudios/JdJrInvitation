@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Countdown: React.FC = () => {
   const SPEED = 150;
@@ -23,28 +23,22 @@ const Countdown: React.FC = () => {
     seconds: [useRef<HTMLSpanElement>(null), useRef<HTMLSpanElement>(null)],
   };
 
-  const padTo2 = useCallback((num: number): string => {
-    return num.toString().padStart(2, '0');
-  }, []);
+  const padTo2 = (num: number): string => num.toString().padStart(2, '0');
 
-  const getCurrentDate = useCallback(() => {
-    const currentDate = new Date();
-    const timeDifference = EXP_DATE.getTime() - currentDate.getTime();
+  const getTimeLeft = () => {
+    const now = new Date();
+    let delta = Math.max(0, EXP_DATE.getTime() - now.getTime());
 
-    if (timeDifference < 0) {
-      return { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
-    }
-
-    const months = Math.floor((timeDifference % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
-    const days = Math.floor((timeDifference % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    const seconds = Math.floor((delta / 1000) % 60);
+    const minutes = Math.floor((delta / (1000 * 60)) % 60);
+    const hours = Math.floor((delta / (1000 * 60 * 60)) % 24);
+    const days = Math.floor((delta / (1000 * 60 * 60 * 24)) % 30.44);
+    const months = Math.floor(delta / (1000 * 60 * 60 * 24 * 30.44));
 
     return { months, days, hours, minutes, seconds };
-  }, [EXP_DATE]);
+  };
 
-  const changeNum = useCallback((el: HTMLElement, newVal: string, timing: number) => {
+  const changeNum = (el: HTMLElement, newVal: string, timing: number) => {
     el.style.scale = '0';
     setTimeout(() => {
       el.innerText = '';
@@ -57,10 +51,10 @@ const Countdown: React.FC = () => {
         }, timing);
       }, timing);
     }, timing);
-  }, []);
+  };
 
-  const updateCountdownDisplay = useCallback(() => {
-    const currentCounts = getCurrentDate();
+  const updateCountdownDisplay = () => {
+    const currentCounts = getTimeLeft();
     const newValues: { [key: string]: string } = {};
     let hasChanged = false;
 
@@ -87,26 +81,24 @@ const Countdown: React.FC = () => {
     if (hasChanged) {
       setCountdownValues(newValues as typeof countdownValues);
     }
-  }, [getCurrentDate, padTo2, changeNum]);
+  };
 
   useEffect(() => {
-    const initialCounts = getCurrentDate();
+    const initialCounts = getTimeLeft();
     const initialValues: { [key: string]: string } = {};
 
     ['months', 'days', 'hours', 'minutes', 'seconds'].forEach((unit) => {
-      const paddedValue = padTo2(initialCounts[unit as keyof typeof initialCounts]);
-      initialValues[unit] = paddedValue;
-
-      refs[unit as keyof typeof refs][0].current!.innerText = paddedValue[0];
-      refs[unit as keyof typeof refs][1].current!.innerText = paddedValue[1];
+      const padded = padTo2(initialCounts[unit as keyof typeof initialCounts]);
+      initialValues[unit] = padded;
+      refs[unit as keyof typeof refs][0].current!.innerText = padded[0];
+      refs[unit as keyof typeof refs][1].current!.innerText = padded[1];
     });
 
     setCountdownValues(initialValues as typeof countdownValues);
-    updateCountdownDisplay();
 
     const intervalId = setInterval(updateCountdownDisplay, 1000);
     return () => clearInterval(intervalId);
-  }, [getCurrentDate, padTo2, updateCountdownDisplay]);
+  }, []); // Run only once
 
   return (
     <div className="countdown-wrapper">

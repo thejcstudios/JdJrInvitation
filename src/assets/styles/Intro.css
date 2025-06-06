@@ -1,99 +1,346 @@
-.background-text-container {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center; /* Vertically center the content */
-    justify-content: center; /* Horizontally center the overlay on all screen sizes */
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
+/* Import Google Font for 'Dancing Script' */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
-  .text-overlay {
-    position: relative; /* Changed to relative so it respects parent's flex centering */
-    /* top, bottom, left are no longer needed with flex centering */
-    width: 90%; /* Default width for mobile, providing some side padding */
-    max-width: 28rem; /* Max width on smaller screens for readability */
-    background-color: rgba(0, 0, 0, 0.7);
+/* --- Keyframe Animations --- */
+
+/* Fall animation for petals */
+@-webkit-keyframes fall {
+  0% { opacity: 0.9; top: 0; }
+  100% { opacity: 0.2; top: 100%; }
+}
+@keyframes fall {
+  0% { opacity: 0.9; top: 0; }
+  100% { opacity: 0.2; top: 100%; }
+}
+
+/* Blow animations (if you plan to use them for other elements) */
+@-webkit-keyframes blow-soft-left {
+  0% { margin-left: 0; }
+  100% { margin-left: -50%; }
+}
+@keyframes blow-soft-left {
+  0% { margin-left: 0; }
+  100% { margin-left: -50%; }
+}
+@-webkit-keyframes blow-medium-left {
+  0% { margin-left: 0; }
+  100% { margin-left: -100%; }
+}
+@keyframes blow-medium-left {
+  0% { margin-left: 0; }
+  100% { margin-left: -100%; }
+}
+@-webkit-keyframes blow-soft-right {
+  0% { margin-left: 0; }
+  100% { margin-left: 50%; }
+}
+@keyframes blow-soft-right {
+  0% { margin-left: 0; }
+  100% { margin-left: 50%; }
+}
+@-webkit-keyframes blow-medium-right {
+  0% { margin-left: 0; }
+  100% { margin-left: 100%; }
+}
+@keyframes blow-medium-right {
+  0% { margin-left: 0; }
+  100% { margin-left: 100%; }
+}
+
+/* Sway animations for petals (these make them drift side-to-side) */
+@-webkit-keyframes sway-0 {
+  0% { -webkit-transform: rotate(-5deg); }
+  40% { -webkit-transform: rotate(28deg); }
+  100% { -webkit-transform: rotate(3deg); }
+}
+@keyframes sway-0 {
+  0% { -ms-transform: rotate(-5deg); transform: rotate(-5deg); }
+  40% { -ms-transform: rotate(28deg); transform: rotate(28deg); }
+  100% { -ms-transform: rotate(3deg); transform: rotate(3deg); }
+}
+@-webkit-keyframes sway-1 {
+  0% { -webkit-transform: rotate(10deg); }
+  40% { -webkit-transform: rotate(43deg); }
+  100% { -webkit-transform: rotate(15deg); }
+}
+@keyframes sway-1 {
+  0% { -ms-transform: rotate(10deg); transform: rotate(10deg); }
+  40% { -ms-transform: rotate(43deg); transform: rotate(43deg); }
+  100% { -ms-transform: rotate(15deg); transform: rotate(15deg); }
+}
+@-webkit-keyframes sway-2 {
+  0% { -webkit-transform: rotate(15deg); }
+  40% { -webkit-transform: rotate(56deg); }
+  100% { -webkit-transform: rotate(22deg); }
+}
+@keyframes sway-2 {
+  0% { -ms-transform: rotate(15deg); transform: rotate(15deg); }
+  40% { -ms-transform: rotate(56deg); transform: rotate(56deg); }
+  100% { -ms-transform: rotate(22deg); transform: rotate(22deg); }
+}
+@-webkit-keyframes sway-3 {
+  0% { -webkit-transform: rotate(25deg); }
+  40% { -webkit-transform: rotate(74deg); }
+  100% { -webkit-transform: rotate(37deg); }
+}
+@keyframes sway-3 {
+  0% { -ms-transform: rotate(25deg); transform: rotate(25deg); }
+  40% { -ms-transform: rotate(74deg); transform: rotate(74deg); }
+  100% { -ms-transform: rotate(37deg); transform: rotate(37deg); }
+}
+@-webkit-keyframes sway-4 {
+  0% { -webkit-transform: rotate(40deg); }
+  40% { -webkit-transform: rotate(68deg); }
+  100% { -webkit-transform: rotate(25deg); }
+}
+@keyframes sway-4 {
+  0% { -ms-transform: rotate(40deg); transform: rotate(40deg); }
+  40% { -ms-transform: rotate(68deg); transform: rotate(68deg); }
+  100% { -ms-transform: rotate(25deg); transform: rotate(25deg); }
+}
+@-webkit-keyframes sway-5 {
+  0% { -webkit-transform: rotate(50deg); }
+  40% { -webkit-transform: rotate(78deg); }
+  100% { -webkit-transform: rotate(40deg); }
+}
+@keyframes sway-5 {
+  0% { -ms-transform: rotate(50deg); transform: rotate(50deg); }
+  40% { -ms-transform: rotate(78deg); transform: rotate(78deg); }
+  100% { -ms-transform: rotate(40deg); transform: rotate(40deg); }
+}
+@-webkit-keyframes sway-6 {
+  0% { -webkit-transform: rotate(65deg); }
+  40% { -webkit-transform: rotate(92deg); }
+  100% { -webkit-transform: rotate(58deg); }
+}
+@keyframes sway-6 {
+  0% { -ms-transform: rotate(65deg); transform: rotate(65deg); }
+  40% { -ms-transform: rotate(92deg); transform: rotate(92deg); }
+  100% { -ms-transform: rotate(58deg); transform: rotate(58deg); }
+}
+@-webkit-keyframes sway-7 {
+  0% { -webkit-transform: rotate(72deg); }
+  40% { -webkit-transform: rotate(118deg); }
+  100% { -webkit-transform: rotate(68deg); }
+}
+@keyframes sway-7 {
+  0% { -ms-transform: rotate(72deg); transform: rotate(72deg); }
+  40% { -ms-transform: rotate(118deg); transform: rotate(118deg); }
+  100% { -ms-transform: rotate(68deg); transform: rotate(68deg); }
+}
+@-webkit-keyframes sway-8 {
+  0% { -webkit-transform: rotate(94deg); }
+  40% { -webkit-transform: rotate(136deg); }
+  100% { -webkit-transform: rotate(82deg); }
+}
+@keyframes sway-8 {
+  0% { -ms-transform: rotate(94deg); transform: rotate(94deg); }
+  40% { -ms-transform: rotate(136deg); transform: rotate(136deg); }
+  100% { -ms-transform: rotate(82deg); transform: rotate(82deg); }
+}
+
+/* --- General Styling --- */
+
+body {
+  font-family: Arial, Helvetica, Sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.wedding-intro-container {
+    position: relative;
+    overflow: hidden; /* Crucial to hide petals outside the container */
+    min-height: 100vh; /* Takes full viewport height */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    align-items: center; /* Center children horizontally within the overlay */
-    text-align: center; /* Center text within the overlay */
+    align-items: center;
+    text-align: center;
+    background-color: #fce4ec; /* Soft pink background fallback */
+  
+    /* Darken background image using a semi-transparent black overlay */
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), /* Adjust the 0.4 for more or less darkness */
+      url('/images/intro.jpg'); /* Your actual image path */
+  
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
-  .text-overlay h1 {
-    color: #FFFFFF;
-    font-size: 2.25rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    border-radius: 0.5rem;
-    text-align: center; /* Ensure text is centered */
+/* Ensure content is layered above the falling petals */
+.wedding-intro-container > img,
+.wedding-intro-container > .wrap,
+.wedding-intro-container > .dance-med {
+    position: relative;
+    z-index: 0; /* Puts these elements on top of the petals */
+}
+
+.wedding-intro-container img {
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+    .wedding-intro-container img {
+    max-width: 30%;
+  }
+}
+
+.top-right-decoration {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  display: block;
+}
+
+.top-left-decoration {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+.title .introname {
+    font-family: 'Dancing Script', cursive;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 60px;
+    margin: 5px 0;
+    color: #D2691E; /* Deep purple */
   }
 
-  .text-overlay p {
-    color: #E5E7EB;
-    font-size: 1.125rem;
-    border-radius: 0.5rem;
-    text-align: center; /* Ensure text is centered */
+.title h1 {
+  font-family: 'Dancing Script', cursive;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 60px;
+  margin: 5px 0;
+  color: #D2691E; /* Deep purple */
+}
+
+.title h2 {
+  font-family: 'Dancing Script', cursive;
+  font-weight: normal;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  color: #e25c67; /* Muted red/pink */
+  line-height: 1;
+}
+
+.dance-med {
+  font-family: 'Dancing Script', cursive;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  z-index: 1;
+  color: #FFE4B5;
+  margin-top: 20px;
+}
+
+.title h3 {
+    font-family: 'Dancing Script', cursive;
+  font-weight: 300;
+  font-size: 30px;
+  color: #FFE4B5;
+  margin-top: 5px;
+}
+
+.title p {
+    font-family: 'Dancing Script', cursive;
+    color: #FFE4B5;
+    margin: 30px auto 20px; /* 'auto' horizontally centers it */
+    font-size: 25px;
+    width: 80%;
+    text-align: center;
   }
 
-  .call-to-action-button {
-    margin-top: 2rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #22C55E;
-    color: #FFFFFF;
-    font-weight: 600;
-    border-radius: 9999px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 300ms ease-in-out;
-    border: none;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    align-self: center; /* Center the button within the overlay */
-  }
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100%;
+  width: 100%;
+}
 
-  .call-to-action-button:hover {
-    background-color: #16A34A;
-  }
+/* --- Sakura Petal Styles --- */
 
-  /* Responsive adjustments for medium screens (md:) */
-  @media (min-width: 768px) {
-    .background-text-container {
-      justify-content: flex-start; /* Revert to left-aligning the overlay */
-    }
+.sakura-falling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Allows clicks to pass through to content behind */
+  z-index: 0; /* Petals are in the background layer */
+}
 
-    .text-overlay {
-      position: absolute; /* Revert to absolute positioning */
-      top: 0;
-      bottom: 0;
-      left: 0; /* Align to the left edge */
-      width: 50%; /* Original width for medium screens */
-      max-width: none; /* Remove max-width constraint */
-      padding: 3rem;
-      align-items: flex-start; /* Revert children to left alignment */
-      text-align: left; /* Revert text to left alignment */
-    }
-    .text-overlay h1,
-    .text-overlay p {
-      text-align: left; /* Ensure text is left aligned */
-    }
-    .call-to-action-button {
-      align-self: flex-start; /* Revert button to left alignment */
-    }
-  }
+.sakura {
+  /* Visuals for the petal */
+  background: radial-gradient(circle at 30% 30%, #FFD1E0, #FFB3C7); /* Soft pink gradient */
+  width: 12px;
+  z-index: 2;
+  height: 12px;
+  border-radius: 50%; /* Simple round shape, can be replaced with an image if preferred */
+  position: absolute; /* Allows positioning within .sakura-falling */
+  pointer-events: none;
+  will-change: transform, opacity, top, left; /* Performance optimization for animations */
 
-  /* Responsive adjustments for large screens (lg:) */
-  @media (min-width: 1024px) {
-    .text-overlay {
-      width: 33.333333%;
-    }
-    .text-overlay h1 {
-      font-size: 3rem;
-    }
-    .text-overlay p {
-      font-size: 1.25rem;
-    }
-  }
+  /* Initial state before animation starts */
+  top: -10px; /* Start slightly above the viewport */
+  opacity: 0; /* Start invisible */
+
+  /*
+   Combined animation property:
+   1. `fall` animation: handles vertical movement and opacity changes.
+   2. `--sway-animation-name` (CSS variable): dynamically set by React to `sway-0` through `sway-8`.
+      This handles the horizontal drift and rotation.
+
+   The `animation-delay` and `animation-duration` are set dynamically via inline styles from React
+   as comma-separated values, which then apply to `fall` (first) and `--sway-animation-name` (second)
+   respectively.
+  */
+  animation-name: fall, var(--sway-animation-name);
+  animation-timing-function: linear, ease-in-out; /* Fall is linear, sway is smoother */
+  animation-iteration-count: infinite, infinite;
+  animation-direction: normal, alternate; /* Fall normally, sway goes back and forth */
+  animation-fill-mode: forwards; /* Maintains the state of the last keyframe */
+}
+
+/* Define the CSS variable for each sway class based on the keyframe name */
+.sway-0 { --sway-animation-name: sway-0; }
+.sway-1 { --sway-animation-name: sway-1; }
+.sway-2 { --sway-animation-name: sway-2; }
+.sway-3 { --sway-animation-name: sway-3; }
+.sway-4 { --sway-animation-name: sway-4; }
+.sway-5 { --sway-animation-name: sway-5; }
+.sway-6 { --sway-animation-name: sway-6; }
+.sway-7 { --sway-animation-name: sway-7; }
+.sway-8 { --sway-animation-name: sway-8; }
+
+.wrapcontainer {
+    background-color: rgb(250, 235, 215);
+    width: 100%;
+    height: 100%;
+}
+
+.title .swipe {
+ color: #D2691E ;
+}
+
+@media (max-width: 1024px) {
+  .wedding-intro-container {
+    min-height: 60vh;
+    
+}
+}
