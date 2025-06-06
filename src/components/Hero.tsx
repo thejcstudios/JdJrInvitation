@@ -13,8 +13,6 @@ const Carousel: React.FC<CarouselProps> = () => {
   // State to store the starting X coordinate for drag calculations
   const [startX, setStartX] = useState(0);
   // State for cursor positions for the custom cursor effect
-  const [cursorX, setCursorX] = useState(0);
-  const [cursorY, setCursorY] = useState(0);
 
   // Ref for the main carousel container element
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -134,66 +132,6 @@ const Carousel: React.FC<CarouselProps> = () => {
     pointerEvents: 'none',
   };
 
-  const layoutStyle: React.CSSProperties = {
-    position: 'absolute',
-    zIndex: 0,
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    pointerEvents: 'none',
-  };
-
-  const layoutBeforeStyle: React.CSSProperties = {
-    content: '""',
-    position: 'absolute',
-    zIndex: 1,
-    top: 0,
-    left: '90px',
-    width: '10px',
-    height: '100%',
-    border: '1px solid #fff',
-    borderTop: 'none',
-    borderBottom: 'none',
-    opacity: 0.15,
-  };
-
-  const layoutBoxStyle: React.CSSProperties = {
-    position: 'absolute',
-    bottom: 0,
-    left: '30px',
-    color: '#fff',
-    transformOrigin: '0% 10%',
-    transform: 'rotate(-90deg)',
-    fontSize: '9px',
-    lineHeight: 1.4,
-    textTransform: 'uppercase',
-    opacity: 0.4,
-  };
-
-  const logoStyle: React.CSSProperties = {
- 
-  };
-
-  const socialStyle: React.CSSProperties = {
-    position: 'absolute',
-    zIndex: 10,
-    bottom: '20px',
-    right: '25px',
-    color: '#fff',
-    opacity: 0.4,
-  };
-
-  const socialLinkStyle: React.CSSProperties = {
-    display: 'inline-block',
-    marginLeft: '3px',
-  };
-
-  const socialSvgStyle: React.CSSProperties = {
-    '--fill': '#fff', // Custom property will be ignored by inline styles, need to pass fill directly
-    width: '35px',
-    height: '35px',
-  };
 
   const cursorBaseStyle: React.CSSProperties = {
     position: 'fixed',
