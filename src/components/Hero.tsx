@@ -140,7 +140,7 @@ const Carousel: React.FC<CarouselProps> = () => {
     border: '1px solid rgba(255, 255, 255, 0.2)',
     margin: `calc(40px * -0.5) 0 0 calc(40px * -0.5)`,
     transition: 'transform 0.85s cubic-bezier(0, 0.02, 0, 1)',
-    display: 'block', // you can change to none to hide initially or control with media queries
+    display: 'block',
     pointerEvents: 'none',
   };
 
@@ -153,7 +153,7 @@ const Carousel: React.FC<CarouselProps> = () => {
   };
 
   // Calculate item style based on index and active item
-  const getItemStyle = useCallback((index: number) => {
+  const getItemStyle = useCallback((index: number): React.CSSProperties => {
     const itemsCount = carouselItemsData.length;
     const zIndex = getZindex(carouselItemsData, activeItemIndex)[index];
     const activeCalc = (index - activeItemIndex) / itemsCount;
@@ -168,7 +168,7 @@ const Carousel: React.FC<CarouselProps> = () => {
 
     return {
       overflow: 'hidden',
-      position: 'absolute' as const,
+      position: 'absolute', // Type assertion for string literal
       zIndex: zIndex,
       width: `${itemWidth}px`,
       height: `${itemHeight}px`,
@@ -180,7 +180,8 @@ const Carousel: React.FC<CarouselProps> = () => {
       transformOrigin: '0% 100%',
       boxShadow: '0 10px 50px 10px rgba(0, 0, 0, 0.5)',
       background: 'black',
-      pointerEvents: 'all',
+      // FIX FOR pointerEvents ERROR: Type assertion
+      pointerEvents: 'all' as React.CSSProperties['pointerEvents'],
       transform: `translate(${x}%, ${y}%) rotate(${rot}deg)`,
       transition: 'transform 0.8s cubic-bezier(0, 0.02, 0, 1)',
       opacity: opacity,
