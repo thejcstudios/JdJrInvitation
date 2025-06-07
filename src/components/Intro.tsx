@@ -58,7 +58,7 @@ const Intro: React.FC = () => {
         <div className="title">
           <h1 className='introname'>Jr & Jd</h1>
           <h3>Are getting married</h3>
-          <p>on 15 June 28 2025, At St. John Bosco Parish & Center for
+          <p>on June 28 2025, At St. John Bosco Parish & Center for
 Young Workers</p>
         </div>
       </div>

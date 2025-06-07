@@ -38,7 +38,7 @@ const VideoSample: React.FC<VideoPlayerProps> = ({
   return (
     <div style={{ textAlign: 'center', margin: '4rem 0' }}>
       <h2 style={{ fontFamily: 'Dancing Script, cursive', fontSize: '2rem' }}>
-        Sneak Peak
+        Sneak Peek
       </h2>
       {src ? (
         <video

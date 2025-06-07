@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Countdown from "./components/Countdown";
 import Intro from "./components/Intro";
 import About from "./components/AboutUs";
+import ImageGallery  from "./components/ImageGallery";
 import Entourage from "./components/Entourage";
 import VideoSample from "./components/VideoSample";
 import DressCode from "./components/DressCode";
@@ -19,6 +20,7 @@ function App() {
       <Hero />
       <Countdown />
       <About />
+      <ImageGallery />
       <Entourage />
       <VideoSample />
       <DressCode /> 
