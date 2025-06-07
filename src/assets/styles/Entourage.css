@@ -19,37 +19,25 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 .checklist-container {
-  border-image: ('https://www.w3schools.com/css/border.png');
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'Dancing Script', cursive;
-  min-height: 100vh;
   width: 90%;
-  margin-top: 5%; /* You might still need this if body's flexbox doesn't push it down enough */
-  margin-bottom: 5%;
-  padding: 1rem;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  overflow: visible;
-  
-  /* You had `background: rgb(250, 235, 215);` which overwrites background-image. */
-  /* If you want an overlay color, use rgba on background-color. */
-  /* For just the image, remove background-color or set to transparent. */
-  /* Let's remove background-color to fully show the image. */
-  background-color: rgb(250, 235, 215); 
+  height: 100%;
+  margin: 4rem auto;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background-color: rgb(250, 235, 215);
+  text-align: center;
 
-  
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 105, 180, 0.3);
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.05),
-    0 12px 24px rgba(0, 0, 0, 0.1),
-    0 0 0 5px rgba(255, 105, 180, 0.1);
-  z-index: 1;
-  transform-origin: center center;
-  box-sizing: border-box;
+  /* 🔽 Faded background image */
+  background-image: url('/images/flowerbg.webp'); /* Replace with your actual path */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: lighten;
+  opacity: 0.95;
+  position: relative;
+  overflow: visible;
 
   /* --- iOS SCROLLING OPTIMIZATIONS --- */
   /* Promote element to its own composite layer for better performance */
