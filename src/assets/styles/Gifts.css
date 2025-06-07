@@ -64,3 +64,10 @@
   right: 0;
   background-image: url('/top-right-floral.png');
 }
+
+.gifts-title,
+.gifts-message {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}

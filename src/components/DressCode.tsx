@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '../assets/styles/DressCode.module.css';
+import type { JSX } from 'react';
 
 import Dress1 from '/images/Dress1.webp';
 import Dress2 from '/images/Dress2.webp';
@@ -16,7 +17,6 @@ const DressCode: React.FC = () => {
   const elementsRef = useRef<(HTMLElement | SVGSVGElement | null)[]>([]);
   const [visibleStates, setVisibleStates] = useState<{ [key: number]: boolean }>({});
 
-  // Assign ref to each DOM element
   const setRef = (el: Element | null) => {
     if (el instanceof HTMLElement || el instanceof SVGSVGElement) {
       const index = Number(el.getAttribute('data-index'));
@@ -29,10 +29,10 @@ const DressCode: React.FC = () => {
       (entries) => {
         entries.forEach(({ target, isIntersecting }) => {
           const index = Number(target.getAttribute('data-index'));
-          setVisibleStates((prev) => {
-            if (prev[index] === isIntersecting) return prev;
-            return { ...prev, [index]: isIntersecting };
-          });
+          if (isIntersecting) {
+            setVisibleStates((prev) => ({ ...prev, [index]: true }));
+            observer.unobserve(target); // 👈 Stop observing after first intersection
+          }
         });
       },
       {
@@ -45,11 +45,7 @@ const DressCode: React.FC = () => {
       if (el) observer.observe(el);
     });
 
-    return () => {
-      elementsRef.current.forEach((el) => {
-        if (el) observer.unobserve(el);
-      });
-    };
+    return () => observer.disconnect();
   }, []);
 
   const totalImages = images.length * 3;
