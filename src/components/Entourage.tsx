@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // Define the type for a single checklist item
 interface ChecklistItem {
-  id: string; // Unique identifier for the item
-  text: string; // The description of the checklist item
+  id: string;
+  text: string;
 }
 
-// Define the type for a checklist category, which contains a title and an array of items
+// Define the type for a checklist category
 interface ChecklistCategory {
-  title: string; // The title of the checklist category (e.g., "SETTING THE FOUNDATION")
-  items: ChecklistItem[]; // An array of items within this category
+  title: string;
+  items: ChecklistItem[];
 }
 
-// Data structure holding all the checklist categories and their items.
-// This is hardcoded for demonstration based on the provided image.
+// Your checklist data here (same as you provided)
 const checklistData: ChecklistCategory[] = [
   {
     title: 'Program',
@@ -27,6 +26,7 @@ const checklistData: ChecklistCategory[] = [
       { id: 'program_7', text: 'Send-Off - 9:00pm' },
     ],
   },
+  // ... (rest of your checklistData categories)
   {
     title: 'Parents of the Groom',
     items: [
@@ -42,7 +42,7 @@ const checklistData: ChecklistCategory[] = [
     ],
   },
   {
-    title: 'Principal Sponsor (Mr.)', // Split for column arrangement
+    title: 'Principal Sponsor (Mr.)',
     items: [
       { id: 'sponsor_mr_1', text: 'Mr. Florecio Parian' },
       { id: 'sponsor_mr_2', text: 'Mr. Nestor Malabanan' },
@@ -55,7 +55,7 @@ const checklistData: ChecklistCategory[] = [
     ],
   },
   {
-    title: 'Principal Sponsor (Mrs.)', // Split for column arrangement
+    title: 'Principal Sponsor (Mrs.)',
     items: [
       { id: 'sponsor_mrs_1', text: 'Mrs. Lorena Parian' },
       { id: 'sponsor_mrs_2', text: 'Mrs. Remedios Malaban' },
@@ -69,15 +69,11 @@ const checklistData: ChecklistCategory[] = [
   },
   {
     title: 'Best Man',
-    items: [
-      { id: 'best_man_1', text: 'John Carlo Pereja' },
-    ],
+    items: [{ id: 'best_man_1', text: 'John Carlo Pereja' }],
   },
   {
     title: 'Maid of Honor',
-    items: [
-      { id: 'moh_1', text: 'Ruffa Mae Cruz' },
-    ],
+    items: [{ id: 'moh_1', text: 'Ruffa Mae Cruz' }],
   },
   {
     title: 'Secondary Sponsor (Mr.)',
@@ -115,21 +111,15 @@ const checklistData: ChecklistCategory[] = [
   },
   {
     title: 'Ring Bearer',
-    items: [
-      { id: 'ring_bearer_1', text: 'Ethan Miguel Aldea' },
-    ],
+    items: [{ id: 'ring_bearer_1', text: 'Ethan Miguel Aldea' }],
   },
   {
     title: 'Arrhae Bearer',
-    items: [
-      { id: 'arrhae_bearer_1', text: 'Lance Aiden Brosas' },
-    ],
+    items: [{ id: 'arrhae_bearer_1', text: 'Lance Aiden Brosas' }],
   },
   {
     title: 'Bible Bearer',
-    items: [
-      { id: 'bible_bearer_1', text: 'Aedan James Brosas' },
-    ],
+    items: [{ id: 'bible_bearer_1', text: 'Aedan James Brosas' }],
   },
   {
     title: 'Flower Girl',
@@ -140,147 +130,101 @@ const checklistData: ChecklistCategory[] = [
   },
 ];
 
-/**
- * WeddingChecklist Component
- * Displays a customizable wedding checklist with categories and items.
- * Users can toggle the completion status of each item.
- */
 const WeddingChecklist: React.FC = () => {
-  // State to manage the completion status of each checklist item.
-  // The key is the item's ID, and the value is a boolean (true if completed, false otherwise).
   const [completedItems, setCompletedItems] = useState<Record<string, boolean>>(() => {
-    // Initialize all items as not completed.
     const initialState: Record<string, boolean> = {};
-    checklistData.forEach(category => {
-      category.items.forEach(item => {
+    checklistData.forEach((category) => {
+      category.items.forEach((item) => {
         initialState[item.id] = false;
       });
     });
     return initialState;
   });
 
-  /**
-   * Toggles the completion status of a given checklist item.
-   * @param itemId The unique ID of the item to toggle.
-   */
+  // Track which items have been animated (visible)
+  const [visibleItems, setVisibleItems] = useState<Record<string, boolean>>({});
+  const itemRefs = useRef<Record<string, HTMLLIElement | null>>({});
+
   const handleToggleComplete = (itemId: string) => {
-    setCompletedItems(prev => ({
+    setCompletedItems((prev) => ({
       ...prev,
-      [itemId]: !prev[itemId], // Toggle the boolean value for the specific item
+      [itemId]: !prev[itemId],
     }));
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('data-id');
+          if (entry.isIntersecting && id) {
+            setVisibleItems((prev) => ({ ...prev, [id]: true }));
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    Object.values(itemRefs.current).forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div className="scroll-wrapper">
-
-    <div className="checklist-container">
-      {/* Main title section */}
-
-      {/* Program Section - Now in its own box */}
-      <div className="program-box">
-      <h1 className="main-title-wedding">Program</h1>
-        <ul className="category-items program-items">
-          {checklistData.find(cat => cat.title === 'Program')?.items.map(item => (
-            <li
-              key={item.id}
-              className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
-              onClick={() => handleToggleComplete(item.id)}
-            >
-              <span className="item-text">{item.text}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Entourage Section - All other categories grouped into a separate box */}
-      <div className="entourage-box">
-      <h1 className="main-title-wedding">Entourage</h1>
-        {/* Parents Section */}
-        <div className="checklist-grid two-column-section">
-          {checklistData.filter(category => category.title.includes('Parents of the')).map(category => (
-            <div key={category.title} className="category-column">
-              <div className="category-section2">
-                <h3 className="category-title">{category.title}</h3>
-                <ul className="category-items">
-                  {category.items.map(item => (
-                    <li
-                      key={item.id}
-                      className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
-                      onClick={() => handleToggleComplete(item.id)}
-                    >
-                      <span className="item-text">{item.text}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
+      <div className="checklist-container">
+        {/* Program Section */}
+        <div className="program-box">
+          <h1 className="main-title-wedding">Program</h1>
+          <ul className="category-items program-items">
+            {checklistData
+              .find((cat) => cat.title === 'Program')
+              ?.items.map((item) => (
+                <li
+                  key={item.id}
+                  ref={(el) => {
+                    itemRefs.current[item.id] = el;
+                  }}
+                  data-id={item.id}
+                  className={`checklist-item ${
+                    completedItems[item.id] ? 'completed' : ''
+                  } ${visibleItems[item.id] ? 'slide-in-left' : ''}`}
+                  onClick={() => handleToggleComplete(item.id)}
+                >
+                  <span className="item-text">{item.text}</span>
+                </li>
+              ))}
+          </ul>
         </div>
-        <hr className="section-separator" />
 
-        {/* Principal Sponsor Section */}
-        <div className="principal-sponsor-section">
-          <h3 className="category-title centered-title">Principal Sponsor</h3>
+        {/* Entourage Section */}
+        <div className="entourage-box">
+          <h1 className="main-title-wedding">Entourage</h1>
+
+          {/* Parents Section */}
           <div className="checklist-grid two-column-section">
-            {checklistData.filter(category => category.title.includes('Principal Sponsor')).map(category => (
-              <div key={category.title} className="category-column">
-                 <div className="category-section2">
-                  <ul className="category-items">
-                    {category.items.map(item => (
-                      <li
-                        key={item.id}
-                        className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
-                        onClick={() => handleToggleComplete(item.id)}
-                      >
-                        <span className="item-text">{item.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-          <hr className="section-separator" />
-        </div>
-
-        {/* Remaining Categories in 2 Columns */}
-        <div className="checklist-grid two-column-section">
-          {checklistData.filter(category =>
-            !['Program', 'Parents of the Groom', 'Parents of the Bride', 'Principal Sponsor (Mr.)', 'Principal Sponsor (Mrs.)'].includes(category.title)
-          ).reduce((acc: ChecklistCategory[][], current, index) => {
-            if (index % 2 === 0) {
-              acc.push([current]);
-            } else {
-              acc[acc.length - 1].push(current);
-            }
-            return acc;
-          }, []).map((pair, index) => (
-            <React.Fragment key={index}>
-              <div className="category-column">
-                <div className="category-section2">
-                  <h3 className="category-title">{pair[0].title}</h3>
-                  <ul className="category-items">
-                    {pair[0].items.map(item => (
-                      <li
-                        key={item.id}
-                        className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
-                        onClick={() => handleToggleComplete(item.id)}
-                      >
-                        <span className="item-text">{item.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              {pair[1] && (
-                <div className="category-column">
+            {checklistData
+              .filter((category) => category.title.includes('Parents of the'))
+              .map((category) => (
+                <div key={category.title} className="category-column">
                   <div className="category-section2">
-                    <h3 className="category-title">{pair[1].title}</h3>
+                    <h3 className="category-title">{category.title}</h3>
                     <ul className="category-items">
-                      {pair[1].items.map(item => (
+                      {category.items.map((item) => (
                         <li
                           key={item.id}
-                          className={`checklist-item ${completedItems[item.id] ? 'completed' : ''}`}
+                          ref={(el) => {
+                            itemRefs.current[item.id] = el;
+                          }}
+                          data-id={item.id}
+                          className={`checklist-item ${
+                            completedItems[item.id] ? 'completed' : ''
+                          } ${visibleItems[item.id] ? 'slide-in-left' : ''}`}
                           onClick={() => handleToggleComplete(item.id)}
                         >
                           <span className="item-text">{item.text}</span>
@@ -289,36 +233,128 @@ const WeddingChecklist: React.FC = () => {
                     </ul>
                   </div>
                 </div>
-              )}
-            </React.Fragment>
-          ))}
+              ))}
+          </div>
+
+          <hr className="section-separator" />
+
+          {/* Principal Sponsor Section */}
+          <div className="principal-sponsor-section">
+            <h3 className="category-title centered-title">Principal Sponsor</h3>
+            <div className="checklist-grid two-column-section">
+              {checklistData
+                .filter((category) => category.title.includes('Principal Sponsor'))
+                .map((category) => (
+                  <div key={category.title} className="category-column">
+                    <div className="category-section2">
+                      <ul className="category-items">
+                        {category.items.map((item) => (
+                          <li
+                            key={item.id}
+                            ref={(el) => {
+                              itemRefs.current[item.id] = el;
+                            }}
+                            data-id={item.id}
+                            className={`checklist-item ${
+                              completedItems[item.id] ? 'completed' : ''
+                            } ${visibleItems[item.id] ? 'slide-in-left' : ''}`}
+                            onClick={() => handleToggleComplete(item.id)}
+                          >
+                            <span className="item-text">{item.text}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+
+          <hr className="section-separator" />
+
+          {/* Best Man & Maid of Honor */}
+          <div className="best-man-maid-section checklist-grid two-column-section">
+            {checklistData
+              .filter(
+                (category) =>
+                  category.title === 'Best Man' || category.title === 'Maid of Honor'
+              )
+              .map((category) => (
+                <div key={category.title} className="category-column">
+                  <div className="category-section2">
+                    <h3 className="category-title">{category.title}</h3>
+                    <ul className="category-items">
+                      {category.items.map((item) => (
+                        <li
+                          key={item.id}
+                          ref={(el) => {
+                            itemRefs.current[item.id] = el;
+                          }}
+                          data-id={item.id}
+                          className={`checklist-item ${
+                            completedItems[item.id] ? 'completed' : ''
+                          } ${visibleItems[item.id] ? 'slide-in-left' : ''}`}
+                          onClick={() => handleToggleComplete(item.id)}
+                        >
+                          <span className="item-text">{item.text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+          </div>
+
+          <hr className="section-separator" />
+
+          {/* Secondary Sponsor, Groomsmen, Bridesmaids, Ring Bearer, Arrhae Bearer, Bible Bearer, Flower Girl */}
+          <div className="checklist-grid multi-column-section">
+            {checklistData
+              .filter(
+                (category) =>
+                  [
+                    'Secondary Sponsor (Mr.)',
+                    'Secondary Sponsor (Ms.)',
+                    'Groomsmen',
+                    'Bridesmaid',
+                    'Ring Bearer',
+                    'Arrhae Bearer',
+                    'Bible Bearer',
+                    'Flower Girl',
+                  ].includes(category.title)
+              )
+              .map((category) => (
+                <div key={category.title} className="category-column">
+                  <div className="category-section2">
+                    <h3 className="category-title">{category.title}</h3>
+                    <ul className="category-items">
+                      {category.items.map((item) => (
+                        <li
+                          key={item.id}
+                          ref={(el) => {
+                            itemRefs.current[item.id] = el;
+                          }}
+                          data-id={item.id}
+                          className={`checklist-item ${
+                            completedItems[item.id] ? 'completed' : ''
+                          } ${visibleItems[item.id] ? 'slide-in-left' : ''}`}
+                          onClick={() => handleToggleComplete(item.id)}
+                        >
+                          <span className="item-text">{item.text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
 
-      {/* Concluding message */}
-      <p className="concluding-message">
-        Plan with love, cherish every moment,
-        <br />
-        and create a beautiful beginning to your forever.
-      </p>
-    </div>
+      {/* CSS styles included for slide-in and completed effect */}
+      
     </div>
   );
 };
 
-/**
- * App Component
- * The main application component that renders the WeddingChecklist.
- * Includes all custom CSS styles.
- */
-const Entourage: React.FC = () => {
-  return (
-    <>
-      <div className="app-container">
-        <WeddingChecklist />
-      </div>
-    </>
-  );
-};
-
-export default Entourage;
+export default WeddingChecklist;

@@ -34,20 +34,20 @@
     align-items: center;
     justify-content: center;
     padding: 2rem; /* p-8 */
-    transition: all 1000ms ease-out; /* transition-all duration-1000 ease-out */
-    opacity: 0; /* Default hidden state */
-    transform: translateY(2rem); /* Default slightly moved down state */
     box-sizing: border-box;
   }
 
-  .parallax-section-1.fade-in {
+  .parallax-section-1-inner.fade-in {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(50px);
   }
 
   .parallax-section-1-inner {
     max-width: 48rem; /* max-w-4xl */
     text-align: center;
+    transition: all 3000ms ease-out; /* transition-all duration-1000 ease-out */
+    opacity: 0; /* Default hidden state */
+    transform: translateY(-3rem); /* Default slightly moved down state */
   }
 
   .parallax-section-1 h2 {

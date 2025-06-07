@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useInView } from '../assets/hooks/useInView';
 
 interface Petal {
   id: string;
@@ -12,7 +13,11 @@ interface Petal {
 
 const Intro: React.FC = () => {
   const [petals, setPetals] = useState<Petal[]>([]);
-
+  const { ref, isInView } = useInView<HTMLDivElement>(); // first element observer
+  const { ref: ref2, isInView: isInView2 } = useInView<HTMLDivElement>(); // second element observer, renamed
+  const { ref: ref3, isInView: isInView3 } = useInView<HTMLDivElement>(); // second element observer, renamed
+  
+  
   useEffect(() => {
     const numPetals = 80; // Adjust for more or fewer petals
     const newPetals: Petal[] = [];
@@ -54,7 +59,10 @@ const Intro: React.FC = () => {
 
       
       {/* Main content wrapper */}
-      <div className="wrap">
+      <div
+      ref={ref}
+      className={`wrap reveal-text ${isInView ? 'visible' : ''}`}
+    >
         <div className="title">
           <h1 className='introname'>Jr & Jd</h1>
           <h3>Are getting married</h3>
@@ -62,15 +70,21 @@ const Intro: React.FC = () => {
 Young Workers</p>
         </div>
       </div>
-
+      <div
+      ref={ref2}
+      className={`dance-med reveal-text ${isInView2 ? 'visible' : ''}`}
+    >
       {/* Closing message */}
-      <p className="dance-med">
+      <p>
         We can’t wait to celebrate our special day with you.
       </p>
-     
+     </div>
     </div>
     <div className="wrapcontainer">
-    <div className="wrap">
+    <div
+      ref={ref3}
+      className={`wrap reveal-text ${isInView3 ? 'visible' : ''}`}
+    >
         <div className="title">
           <h1>Prenup</h1>
         

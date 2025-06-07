@@ -234,7 +234,7 @@ body {
   line-height: 1;
 }
 
-.dance-med {
+.dance-med p{
   font-family: 'Dancing Script', cursive;
   font-weight: normal;
   font-style: normal;
@@ -358,4 +358,33 @@ body {
   50% {
     transform: translateX(10px);
   }
+}
+
+.reveal-text {
+  opacity: 0;
+  transform: translateY(60px); /* Slide in from bottom */
+  transition: opacity 1.8s ease, transform 1.8s ease; /* Slower fade and move */
+  text-align: center;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.reveal-text.visible {
+  opacity: 1;
+  transform: translateY(0); /* Return to natural position */
+}
+
+.dance-med {
+  opacity: 0;
+  transform: translateY(60px); /* start 60px below */
+  transition: opacity 4s ease, transform 2.5s ease; /* slow */
+  /* optional styling */
+  font-size: 1.2rem;
+  color: #333;
+  text-align: center;
+}
+
+.dance-med.visible {
+  opacity: 1;
+  transform: translateY(0); /* move to natural position */
 }

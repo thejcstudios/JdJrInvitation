@@ -24,9 +24,9 @@
   
 
     .countdown-wrapper h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 50px;
-    color: #D2691E;
+    font-family: "Lavishly Yours", cursive;
+    font-size: 200px;
+    color: beige;
     margin-top: 5px;
         z-index: 1; /* Ensure title is above background */
     }

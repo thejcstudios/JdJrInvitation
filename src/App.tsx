@@ -5,7 +5,6 @@ import Intro from "./components/Intro";
 import About from "./components/AboutUs";
 import ImageGallery  from "./components/ImageGallery";
 import Entourage from "./components/Entourage";
-import VideoSample from "./components/VideoSample";
 import DressCode from "./components/DressCode";
 import MapLocation from "./components/MapLocation";
 import RsvpForm from "./components/RsvpForm";
@@ -23,7 +22,6 @@ function App() {
       <About />
       <ImageGallery />
       <Entourage />
-      <VideoSample />
       <DressCode /> 
       <MapLocation />
       <RsvpForm />
