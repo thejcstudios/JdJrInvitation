@@ -11,6 +11,9 @@ import RsvpForm from "./components/RsvpForm";
 import Faq from "./components/FaqItem";
 import Gifts from "./components/Gifts";
 import Footer from "./components/Footer";
+import BackgroundMusic from "./components/BackgroundMusic";
+import bgMusicFile from '/music/bgmusic.mp3'; 
+import VideoFile from "./components/VideoFile";
 
 
 function App() {
@@ -22,13 +25,24 @@ function App() {
       <Countdown />
       <About />
       <ImageGallery />
+      <div>
+      {/* Play local video */}
+      <VideoFile
+        src="/video/videofile.mp4"  // path relative to public folder
+        autoPlay={false}
+        loop={false}
+        muted={false}
+      />
+    </div>
       <Entourage />
       <DressCode /> 
       <MapLocation />
       <RsvpForm />
       <Faq />
       <Gifts />
+      <BackgroundMusic src={bgMusicFile} volume={0.2} />
       <Footer />
+      
     </div>
   );
 }
