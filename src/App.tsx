@@ -8,6 +8,7 @@ import Entourage from "./components/Entourage";
 import DressCode from "./components/DressCode";
 import MapLocation from "./components/MapLocation";
 import RsvpForm from "./components/RsvpForm";
+import Faq from "./components/FaqItem";
 import Gifts from "./components/Gifts";
 import Footer from "./components/Footer";
 
@@ -25,6 +26,7 @@ function App() {
       <DressCode /> 
       <MapLocation />
       <RsvpForm />
+      <Faq />
       <Gifts />
       <Footer />
     </div>

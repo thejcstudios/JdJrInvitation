@@ -53,7 +53,8 @@ export default function ImageGallery() {
   }, [visibleItems]);
 
   return (
-    <>
+    
+    <section id="prenup">
       <div className="gallarytext">
         <h1
           ref={titleRef}
@@ -85,6 +86,7 @@ export default function ImageGallery() {
           </div>
         ))}
       </div>
-    </>
+      </section>
+  
   );
 }

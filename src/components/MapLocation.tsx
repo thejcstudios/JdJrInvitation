@@ -22,6 +22,7 @@ const locations: Location[] = [
 
 const MapLocation: React.FC = () => {
   return (
+    <section id="location">
     <div className={styles.container}>
       <h2 className={styles.heading}>Our Wedding Locations</h2>
       <div className={styles.locations}>
@@ -41,6 +42,7 @@ const MapLocation: React.FC = () => {
         ))}
       </div>
     </div>
+    </section>
   );
 };
 

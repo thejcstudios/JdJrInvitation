@@ -3,6 +3,7 @@ import styles from '../assets/styles/RsvpForm.module.css';
 
 const RsvpForm: React.FC = () => {
   return (
+    <section id="rsvp">
     <div className={styles.container}>
       <h2 className={styles.heading}>RSVP</h2>
       <p className={styles.subheading}>
@@ -23,6 +24,7 @@ const RsvpForm: React.FC = () => {
         </iframe>
       </div>
     </div>
+    </section>
   );
 };
 
