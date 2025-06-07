@@ -9,6 +9,7 @@ import VideoSample from "./components/VideoSample";
 import DressCode from "./components/DressCode";
 import MapLocation from "./components/MapLocation";
 import RsvpForm from "./components/RsvpForm";
+import Gifts from "./components/Gifts";
 import Footer from "./components/Footer";
 
 
@@ -26,6 +27,7 @@ function App() {
       <DressCode /> 
       <MapLocation />
       <RsvpForm />
+      <Gifts />
       <Footer />
     </div>
   );

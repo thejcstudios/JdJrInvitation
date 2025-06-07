@@ -59,6 +59,9 @@ const ImageGallery: React.FC = () => {
   ];
 
   return (
+    <>
+    <div className="prenup">
+    <h3>More Prenup Photos</h3></div>
     <section className="gallery-wrapper" ref={wrapperRef}>
       <div id="container" ref={containerRef}>
         {images.map((src, idx) => (
@@ -68,6 +71,7 @@ const ImageGallery: React.FC = () => {
         ))}
       </div>
     </section>
+    </>
   );
 };
 
