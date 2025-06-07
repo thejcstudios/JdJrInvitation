@@ -5,6 +5,8 @@ import Intro from "./components/Intro";
 import About from "./components/AboutUs";
 import Entourage from "./components/Entourage";
 import DressCode from "./components/DressCode";
+import MapLocation from "./components/MapLocation";
+import RsvpForm from "./components/RsvpForm";
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
       <About />
       <Entourage />
       <DressCode /> 
+      <MapLocation />
+      <RsvpForm />
     </div>
   );
 }
