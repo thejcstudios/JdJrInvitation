@@ -24,7 +24,7 @@ const faqData: FaqItem[] = [
   {
     question: 'Are children allowed at the wedding?',
     answer:
-      'While we love your little ones, the ceremony and reception will be an adults-only event.',
+    'Yes, children are welcome to join us in celebrating this special occasion!',
   },
 ];
 

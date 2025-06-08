@@ -1,26 +1,50 @@
 .footer {
-    background-color: #fdf6f0;
-    padding: 2rem 1rem;
-    text-align: center;
-    font-family: 'Dancing Script', cursive;
-    color: #7b4f35;
-    border-top: 1px solid #e0cfc2;
-    margin-top: 4rem;
-  }
-  
-  .message {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .message span {
-    font-weight: bold;
-    color: #a0522d;
-  }
-  
-  .credit {
-    font-size: 1rem;
-    font-family: 'Open Sans', sans-serif;
-    color: #a78b71;
-  }
-  
+  background-color: #fffaf0;
+  color: #5c4033;
+  font-family: "Lavishly Yours", cursive;
+  border-top: 1px solid #e0d4c2;
+  padding: 2rem;
+  text-align: center;
+}
+
+.footerList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+}
+
+.message {
+  font-size: 2rem;
+}
+
+.message span {
+  font-weight: bold;
+  color: #a0522d;
+}
+
+.credit,
+.dev {
+  font-family: "Savate", sans-serif;
+  font-size: 1rem;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.socials a {
+  font-size: 1.2rem;
+  color: #3b5998;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.socials a:hover {
+  transform: scale(1.2);
+  color: #1877f2;
+}

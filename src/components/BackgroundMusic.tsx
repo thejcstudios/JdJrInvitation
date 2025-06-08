@@ -2,52 +2,48 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface BackgroundMusicProps {
   src: string;
-  volume?: number; // 0 to 1
+  volume?: number;
 }
 
 const BackgroundMusic: React.FC<BackgroundMusicProps> = ({ src, volume = 0.5 }) => {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [hasPlayed, setHasPlayed] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(new Audio(src));
   const [isPlaying, setIsPlaying] = useState(false);
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    const handleUserInteraction = () => {
-      if (!hasPlayed && audioRef.current) {
-        audioRef.current.volume = volume;
-        audioRef.current.muted = false;
-        audioRef.current.play().then(() => {
+    const handleInteraction = () => {
+      const audio = audioRef.current;
+      if (!initialized && audio) {
+        audio.volume = volume;
+        audio.loop = true;
+        audio.muted = false;
+        audio.play().then(() => {
           setIsPlaying(true);
-          setHasPlayed(true);
-        }).catch(() => {
-          // Handle play failure if needed
+          setInitialized(true);
+        }).catch((e) => {
+          console.warn("Autoplay blocked:", e);
         });
-
-        // Remove listeners once played
-        document.removeEventListener("click", handleUserInteraction);
-        document.removeEventListener("keydown", handleUserInteraction);
-        document.removeEventListener("touchstart", handleUserInteraction);
       }
     };
 
-    document.addEventListener("click", handleUserInteraction);
-    document.addEventListener("keydown", handleUserInteraction);
-    document.addEventListener("touchstart", handleUserInteraction);
+    document.addEventListener("click", handleInteraction, { once: true });
+    document.addEventListener("touchstart", handleInteraction, { once: true });
 
     return () => {
-      document.removeEventListener("click", handleUserInteraction);
-      document.removeEventListener("keydown", handleUserInteraction);
-      document.removeEventListener("touchstart", handleUserInteraction);
+      document.removeEventListener("click", handleInteraction);
+      document.removeEventListener("touchstart", handleInteraction);
     };
-  }, [hasPlayed, volume]);
+  }, [volume, initialized]);
 
-  const togglePlay = () => {
-    if (!audioRef.current) return;
+  const togglePlayback = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
 
     if (isPlaying) {
-      audioRef.current.pause();
+      audio.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current.play().then(() => {
+      audio.play().then(() => {
         setIsPlaying(true);
       });
     }
@@ -55,20 +51,10 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({ src, volume = 0.5 }) 
 
   return (
     <>
-      <audio
-        ref={audioRef}
-        src={src}
-        loop
-        preload="auto"
-        muted
-        autoPlay
-        style={{ display: "none" }}
-      />
-
-      {/* Show button only after music started playing */}
-      {hasPlayed && (
+      {/* Audio tag not rendered because we use new Audio() instead */}
+      {initialized && (
         <button
-          onClick={togglePlay}
+          onClick={togglePlayback}
           style={{
             position: "fixed",
             bottom: "20px",

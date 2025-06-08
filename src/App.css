@@ -29,6 +29,7 @@ html, body {
     
     display: grid !important;
     justify-items: center;
+    height: 120vh !important;
    
   }
 

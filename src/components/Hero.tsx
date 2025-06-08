@@ -118,13 +118,13 @@ const Carousel: React.FC<CarouselProps> = () => {
     backgroundColor: '#FAEBD7',
     margin: 0,
     padding: 0,
-    height: '100vh',
+    height: '70vh',
   };
 
   const carouselStyle: React.CSSProperties = {
     position: 'relative',
     zIndex: 1,
-    height: '100vh',
+    height: '60vh',
     overflow: 'hidden',
     pointerEvents: 'none',
   };
@@ -158,8 +158,8 @@ const Carousel: React.FC<CarouselProps> = () => {
     const zIndex = getZindex(carouselItemsData, activeItemIndex)[index];
     const activeCalc = (index - activeItemIndex) / itemsCount;
 
-    const itemWidth = 400;
-    const itemHeight = 500;
+    const itemWidth = 250;
+    const itemHeight = 350;
 
     const x = activeCalc * 800;
     const y = activeCalc * 200;
