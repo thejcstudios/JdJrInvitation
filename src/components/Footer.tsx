@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
           © 2025 Our Wedding. All rights reserved.
         </li>
         <li className={styles.dev}>
-          Developed by: <strong>Ronnel Santos</strong>
+          Dev: <strong>Ronnel Santos</strong>
         </li>
         <li className={styles.socials}>
           <a
