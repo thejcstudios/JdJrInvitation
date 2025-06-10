@@ -26,9 +26,9 @@ function App() {
       <About />
       <ImageGallery />
       <div>
-      {/* Play local video */}
       <VideoFile
-        src="/video/videofile.mp4"  // path relative to public folder
+        src="/video/videofile.mp4"
+        thumbnail="/images/hero.jpg"
         autoPlay={false}
         loop={false}
         muted={false}
